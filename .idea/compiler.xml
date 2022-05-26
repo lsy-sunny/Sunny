@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="sunny-system" />
+        <module name="sunny-admin" />
+        <module name="sunny-quartz" />
+        <module name="sunny-common" />
+        <module name="sunny-generator" />
+        <module name="sunny-framework" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="sunny" target="1.8" />
+      <module name="sunny-admin" target="1.8" />
+      <module name="sunny-common" target="1.8" />
+      <module name="sunny-framework" target="1.8" />
+      <module name="sunny-generator" target="1.8" />
+      <module name="sunny-quartz" target="1.8" />
+      <module name="sunny-system" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

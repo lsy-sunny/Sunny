@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/sunny.iml" filepath="$PROJECT_DIR$/sunny.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sunny-admin/sunny-admin.iml" filepath="$PROJECT_DIR$/sunny-admin/sunny-admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sunny-common/sunny-common.iml" filepath="$PROJECT_DIR$/sunny-common/sunny-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sunny-framework/sunny-framework.iml" filepath="$PROJECT_DIR$/sunny-framework/sunny-framework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sunny-generator/sunny-generator.iml" filepath="$PROJECT_DIR$/sunny-generator/sunny-generator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sunny-quartz/sunny-quartz.iml" filepath="$PROJECT_DIR$/sunny-quartz/sunny-quartz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sunny-system/sunny-system.iml" filepath="$PROJECT_DIR$/sunny-system/sunny-system.iml" />
+    </modules>
+  </component>
+</project>
