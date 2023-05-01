@@ -11,7 +11,7 @@ import com.lsy.sunny.common.enums.LimitType;
 
 /**
  * 限流注解
- *
+ *在其他的地方没有进行使用
  * @author sunny
  */
 @Target(ElementType.METHOD)

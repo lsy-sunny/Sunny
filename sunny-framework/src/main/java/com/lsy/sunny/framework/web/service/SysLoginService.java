@@ -67,6 +67,7 @@ public class SysLoginService {
         Authentication authentication = null;
         try {
             // 该方法会去调用UserDetailsServiceImpl.loadUserByUsername
+            //这句话的意思就是在执行登录
             authentication = authenticationManager
                     .authenticate(new UsernamePasswordAuthenticationToken(username, password));
         } catch (Exception e) {
@@ -94,17 +95,23 @@ public class SysLoginService {
      * @return 结果
      */
     public void validateCaptcha(String username, String code, String uuid) {
+
         String verifyKey = Constants.CAPTCHA_CODE_KEY + StringUtils.nvl(uuid, "");
+        //获取到redis中保存的验证码文本
         String captcha = redisCache.getCacheObject(verifyKey);
         redisCache.deleteObject(verifyKey);
+        //如果redis中不存在这个验证码，就登陆失败了，（过期时间到了之后，redis中不会再有这个验证码的记录）
         if (captcha == null) {
+            // 开启一个异步任务去写日志，将其记录在日志表中，就是数据库中的表
             AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.expire")));
             throw new CaptchaExpireException();
         }
+        //如果验证码与redis中的不一样
         if (!code.equalsIgnoreCase(captcha)) {
             AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, MessageUtils.message("user.jcaptcha.error")));
             throw new CaptchaException();
         }
+        //只要不出现异常就表示验证通过了。
     }
 
     /**

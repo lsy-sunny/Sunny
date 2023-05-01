@@ -45,6 +45,7 @@ public class CaptchaController {
     @GetMapping("/captchaImage")
     public AjaxResult getCode(HttpServletResponse response) throws IOException {
         AjaxResult ajax = AjaxResult.success();
+        //去数据库中查询验证码是否开启，在数据库的sys_config表中有一个关于验证码的信息。
         boolean captchaOnOff = configService.selectCaptchaOnOff();
         ajax.put("captchaOnOff", captchaOnOff);
         if (!captchaOnOff) {
@@ -62,14 +63,21 @@ public class CaptchaController {
         String captchaType = SunnyConfig.getCaptchaType();
         if ("math".equals(captchaType)) {
             String capText = captchaProducerMath.createText();
+            //将生成验证码的文本进行打印
+            //格式：1+1=？@2   8+2=?@10
+            System.out.println(capText);
+            //计算的文本
             capStr = capText.substring(0, capText.lastIndexOf("@"));
+           // 结果文本
             code = capText.substring(capText.lastIndexOf("@") + 1);
+            //根据上面的文本生成图像
             image = captchaProducerMath.createImage(capStr);
         } else if ("char".equals(captchaType)) {
             capStr = code = captchaProducer.createText();
             image = captchaProducer.createImage(capStr);
         }
 
+        //过期时间两分钟
         redisCache.setCacheObject(verifyKey, code, Constants.CAPTCHA_EXPIRATION, TimeUnit.MINUTES);
         // 转换流信息写出
         FastByteArrayOutputStream os = new FastByteArrayOutputStream();
@@ -80,6 +88,7 @@ public class CaptchaController {
         }
 
         ajax.put("uuid", uuid);
+        //base64转码，返回到前端，ajax是返回到前端的封装格式。
         ajax.put("img", Base64.encode(os.toByteArray()));
         return ajax;
     }
